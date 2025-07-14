@@ -1,48 +1,80 @@
-# Welcome to your VS Code Extension
+# 📁 Folder Structure Navigator — VS Code Extension
 
-## What's in the folder
+This repository contains the complete source code for your **Folder Structure Navigator** — a VS Code extension to generate, explore, and export your project’s folder structure, with smart `.gitignore` integration and powerful custom filtering.
 
-* This folder contains all of the files necessary for your extension.
-* `package.json` - this is the manifest file in which you declare your extension and command.
-  * The sample plugin registers a command and defines its title and command name. With this information VS Code can show the command in the command palette. It doesn’t yet need to load the plugin.
-* `src/extension.ts` - this is the main file where you will provide the implementation of your command.
-  * The file exports one function, `activate`, which is called the very first time your extension is activated (in this case by executing the command). Inside the `activate` function we call `registerCommand`.
-  * We pass the function containing the implementation of the command as the second parameter to `registerCommand`.
+---
 
-## Setup
+## 🚀 What's in this folder?
 
-* install the recommended extensions (amodio.tsl-problem-matcher, ms-vscode.extension-test-runner, and dbaeumer.vscode-eslint)
+* `package.json`:
+  Defines the extension manifest, commands, settings, activation events, and VS Code metadata.
 
+* `src/extension.ts`:
+  The main entry point. This is where:
 
-## Get up and running straight away
+  * The `activate` function is defined (called by VS Code when the extension loads).
+  * Commands like `generateStructure` and `generateCustomStructure` are registered.
+  * All core logic for traversing folders and writing structure files lives.
 
-* Press `F5` to open a new window with your extension loaded.
-* Run your command from the command palette by pressing (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and typing `Hello World`.
-* Set breakpoints in your code inside `src/extension.ts` to debug your extension.
-* Find output from your extension in the debug console.
+* `test/`:
+  Contains automated tests using Mocha & VS Code Test Runner.
 
-## Make changes
+* `esbuild.js` & `tsconfig.json`:
+  For bundling TypeScript efficiently.
 
-* You can relaunch the extension from the debug toolbar after changing code in `src/extension.ts`.
-* You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with your extension to load your changes.
+---
 
+## ⚙ Setup for development
 
-## Explore the API
+* Install recommended extensions:
 
-* You can open the full set of our API when you open the file `node_modules/@types/vscode/index.d.ts`.
+  * `dbaeumer.vscode-eslint` for linting
+  * `amodio.tsl-problem-matcher` for better TypeScript errors in tasks
+  * `ms-vscode.extension-test-runner` for running extension tests
 
-## Run tests
+---
 
-* Install the [Extension Test Runner](https://marketplace.visualstudio.com/items?itemName=ms-vscode.extension-test-runner)
-* Run the "watch" task via the **Tasks: Run Task** command. Make sure this is running, or tests might not be discovered.
-* Open the Testing view from the activity bar and click the Run Test" button, or use the hotkey `Ctrl/Cmd + ; A`
-* See the output of the test result in the Test Results view.
-* Make changes to `src/test/extension.test.ts` or create new test files inside the `test` folder.
-  * The provided test runner will only consider files matching the name pattern `**.test.ts`.
-  * You can create folders inside the `test` folder to structure your tests any way you want.
+## 🚀 Get up and running immediately
 
-## Go further
+1. Open this folder in VS Code.
 
-* Reduce the extension size and improve the startup time by [bundling your extension](https://code.visualstudio.com/api/working-with-extensions/bundling-extension).
-* [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VS Code extension marketplace.
-* Automate builds by setting up [Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration).
+2. Press `F5` to launch a new VS Code window **with your extension loaded in development mode**.
+
+3. Right-click on any folder in the Explorer to:
+
+   * 🗂 `Generate Folder Structure`
+   * ⚙ `Generate Custom Structure`
+
+4. Debug by setting breakpoints in `src/extension.ts` — check the Debug Console for logs.
+
+---
+
+## 🔄 Making changes
+
+* Modify code in `src/extension.ts`.
+* Re-run your extension with the debug toolbar, or reload the VS Code window (`Ctrl+R` / `Cmd+R` on Mac).
+
+---
+
+## 🧪 Running tests
+
+* Run the `"watch"` task via **Tasks: Run Task**, so TypeScript stays in sync.
+* Open the Testing view (`Ctrl+Shift+;` on Windows / `Cmd+Shift+;` on Mac) and click Run Tests.
+* Modify or add tests in `test/**/*.test.ts`.
+
+---
+
+## 💡 Exploring the VS Code API
+
+* For full intellisense, open `node_modules/@types/vscode/index.d.ts`.
+* Or browse the [VS Code Extension API docs](https://code.visualstudio.com/api).
+
+---
+
+## 🚀 Going further
+
+* Reduce size & improve startup time by [bundling your extension](https://code.visualstudio.com/api/working-with-extensions/bundling-extension) with esbuild (already set up here).
+* [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) to the Marketplace.
+* Automate builds & tests with [CI/CD for extensions](https://code.visualstudio.com/api/working-with-extensions/continuous-integration).
+
+---
