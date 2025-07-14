@@ -1,10 +1,10 @@
 {
   "name": "folder-structure-navigator",
   "displayName": "folder-structure-navigator",
-  "description": "folder structure navigator for VS Code with smart .gitignore integration and export options.? Initialize a git repository?",
+  "description": "folder structure navigator for VS Code with smart .gitignore integration and export options. Initialize a git repository?",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.102.0"
+    "vscode": "^1.80.0"
   },
   "categories": [
     "Other"
@@ -15,26 +15,53 @@
     "commands": [
       {
         "command": "advanced-folder-structure-navigator.generateStructure",
-        "title": "Generate Folder Structure"
+        "title": "Generate Folder Structure",
+        "icon": "$(file-directory)"
       },
       {
-        "command": "advanced-folder-structure-navigator.createFileAndGitignore",
-        "title": "Create File & Update .gitignore"
+        "command": "advanced-folder-structure-navigator.generateCustomStructure",
+        "title": "Generate Custom Structure",
+        "icon": "$(settings-gear)"
       }
     ],
     "menus": {
       "explorer/context": [
         {
+          "when": "resourceScheme == file && explorerResourceIsFolder",
           "command": "advanced-folder-structure-navigator.generateStructure",
-          "when": "resourceLangId",
-          "group": "navigation"
+          "group": "navigation@1"
         },
         {
-          "command": "advanced-folder-structure-navigator.createFileAndGitignore",
-          "when": "resourceLangId",
-          "group": "navigation"
+          "when": "resourceScheme == file && explorerResourceIsFolder",
+          "command": "advanced-folder-structure-navigator.generateCustomStructure",
+          "group": "navigation@3"
         }
       ]
+    },
+    "configuration": {
+      "title": "Folder Structure Navigator",
+      "properties": {
+        "advanced-folder-structure-navigator.outputFileName": {
+          "type": "string",
+          "default": "structure.txt",
+          "description": "Default filename for generated structure files"
+        },
+        "advanced-folder-structure-navigator.includeHiddenFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include hidden files (starting with .) in structure"
+        },
+        "advanced-folder-structure-navigator.maxDepth": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum depth for directory traversal"
+        },
+        "advanced-folder-structure-navigator.defaultExcludeFolders": {
+          "type": "array",
+          "default": ["node_modules", ".git", "dist", "build"],
+          "description": "Default folders to exclude from structure"
+        }
+      }
     }
   },
   "scripts": {
@@ -64,4 +91,5 @@
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2"
   }
+  
 }
