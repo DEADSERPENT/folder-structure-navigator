@@ -1,10 +1,19 @@
 {
   "name": "folder-structure-navigator",
+  "publisher": "samarthasmg14",
   "displayName": "folder-structure-navigator",
-  "description": "folder structure navigator for VS Code with smart .gitignore integration and export options. Initialize a git repository?",
+  "description": "Folder structure navigator for VS Code with smart .gitignore integration and export options.",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DEADSERPENT/folder-structure-navigator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DEADSERPENT/folder-structure-navigator/issues"
+  },
+  "homepage": "https://github.com/DEADSERPENT/folder-structure-navigator#readme",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.102.0"
   },
   "categories": [
     "Other"
@@ -91,5 +100,4 @@
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2"
   }
-  
 }
