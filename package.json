@@ -3,7 +3,7 @@
   "publisher": "samarthasmg14",
   "displayName": "Folder Structure Navigator v2.0",
   "description": "Generate comprehensive, customizable folder structure representations with advanced filtering, multiple output formats, and performance optimization.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/DEADSERPENT/folder-structure-navigator.git"
@@ -16,8 +16,8 @@
     "vscode": "^1.102.0"
   },
   "categories": [
-  "Other",
-  "Visualization"
+    "Other",
+    "Visualization"
   ],
   "keywords": [
     "folder",
@@ -286,7 +286,10 @@
               "includeHidden": false,
               "includeSize": false,
               "maxDepth": 5,
-              "excludeFolders": ["node_modules", ".git"]
+              "excludeFolders": [
+                "node_modules",
+                ".git"
+              ]
             },
             "detailed": {
               "includeHidden": true,
@@ -299,11 +302,27 @@
               "includeSize": false,
               "maxDepth": 3,
               "outputFormat": "markdown",
-              "excludeFolders": ["node_modules", ".git", "dist", "build"]
+              "excludeFolders": [
+                "node_modules",
+                ".git",
+                "dist",
+                "build"
+              ]
             },
             "development": {
               "includeHidden": false,
-              "extensionFilter": ["js", "ts", "jsx", "tsx", "vue", "py", "java", "cpp", "c", "h"],
+              "extensionFilter": [
+                "js",
+                "ts",
+                "jsx",
+                "tsx",
+                "vue",
+                "py",
+                "java",
+                "cpp",
+                "c",
+                "h"
+              ],
               "respectGitignore": true,
               "maxDepth": 8
             }
