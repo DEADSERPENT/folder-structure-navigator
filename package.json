@@ -1,9 +1,9 @@
 {
   "name": "folder-structure-navigator",
   "publisher": "samarthasmg14",
-  "displayName": "folder-structure-navigator",
-  "description": "Folder structure navigator for VS Code with smart .gitignore integration and export options.",
-  "version": "0.0.1",
+  "displayName": "Folder Structure Navigator v2.0",
+  "description": "Generate comprehensive, customizable folder structure representations with advanced filtering, multiple output formats, and performance optimization.",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/DEADSERPENT/folder-structure-navigator.git"
@@ -16,7 +16,18 @@
     "vscode": "^1.102.0"
   },
   "categories": [
-    "Other"
+  "Other",
+  "Visualization"
+  ],
+  "keywords": [
+    "folder",
+    "structure",
+    "tree",
+    "directory",
+    "navigation",
+    "export",
+    "documentation",
+    "visualization"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
@@ -28,9 +39,29 @@
         "icon": "$(file-directory)"
       },
       {
-        "command": "advanced-folder-structure-navigator.generateCustomStructure",
-        "title": "Generate Custom Structure",
+        "command": "advanced-folder-structure-navigator.generateInteractiveStructure",
+        "title": "Generate Interactive Structure",
         "icon": "$(settings-gear)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.compareDirectories",
+        "title": "Compare Directory Structures",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.exportStructure",
+        "title": "Export Structure (Multiple Formats)",
+        "icon": "$(export)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.showPerformanceReport",
+        "title": "Show Performance Report",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.manageTemplates",
+        "title": "Manage Structure Templates",
+        "icon": "$(template)"
       }
     ],
     "menus": {
@@ -41,37 +72,270 @@
           "group": "navigation@1"
         },
         {
-          "when": "resourceScheme == file && explorerResourceIsFolder",
-          "command": "advanced-folder-structure-navigator.generateCustomStructure",
+          "when": "explorerResourceIsFolder",
+          "command": "advanced-folder-structure-navigator.generateInteractiveStructure",
           "group": "navigation@3"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "advanced-folder-structure-navigator.exportStructure",
+          "group": "navigation@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "advanced-folder-structure-navigator.generateStructure",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.generateInteractiveStructure",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.compareDirectories"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.exportStructure",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.showPerformanceReport"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.manageTemplates"
         }
       ]
     },
     "configuration": {
-      "title": "Folder Structure Navigator",
+      "title": "Advanced Folder Structure Navigator",
       "properties": {
+        "advanced-folder-structure-navigator.includeHiddenFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include hidden files and directories (those starting with .)"
+        },
+        "advanced-folder-structure-navigator.extensionFilter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": null,
+          "description": "Only include files with these extensions (e.g., [\"js\", \"ts\", \"json\"])"
+        },
+        "advanced-folder-structure-navigator.excludeFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            ".vscode",
+            ".idea",
+            "__pycache__",
+            "target",
+            "bin",
+            "obj"
+          ],
+          "description": "Folders to exclude from structure generation"
+        },
+        "advanced-folder-structure-navigator.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "*.log",
+            "*.tmp",
+            "*.cache",
+            "*.lock",
+            "Thumbs.db",
+            ".DS_Store"
+          ],
+          "description": "Glob patterns to exclude from structure (supports * and ** wildcards)"
+        },
+        "advanced-folder-structure-navigator.maxDepth": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 50,
+          "description": "Maximum directory depth to traverse (0 = unlimited)"
+        },
+        "advanced-folder-structure-navigator.respectGitignore": {
+          "type": "boolean",
+          "default": true,
+          "description": "Respect .gitignore rules when generating structures"
+        },
+        "advanced-folder-structure-navigator.includeSize": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include file and directory sizes in the output"
+        },
+        "advanced-folder-structure-navigator.includePermissions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include file permissions in the output (Unix-like systems)"
+        },
+        "advanced-folder-structure-navigator.includeModifiedDate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include last modified date in the output"
+        },
+        "advanced-folder-structure-navigator.sortBy": {
+          "type": "string",
+          "enum": [
+            "name",
+            "size",
+            "modified",
+            "type"
+          ],
+          "default": "name",
+          "description": "Sort files and directories by this criteria"
+        },
+        "advanced-folder-structure-navigator.outputFormat": {
+          "type": "string",
+          "enum": [
+            "tree",
+            "json",
+            "markdown",
+            "xml",
+            "csv"
+          ],
+          "default": "tree",
+          "description": "Default output format for structure generation"
+        },
         "advanced-folder-structure-navigator.outputFileName": {
           "type": "string",
           "default": "structure.txt",
           "description": "Default filename for generated structure files"
         },
-        "advanced-folder-structure-navigator.includeHiddenFiles": {
+        "advanced-folder-structure-navigator.useProgressIndicator": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show progress indicator during structure generation"
+        },
+        "advanced-folder-structure-navigator.enableCaching": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable caching for improved performance on repeated operations"
+        },
+        "advanced-folder-structure-navigator.cacheTimeout": {
+          "type": "number",
+          "default": 300000,
+          "description": "Cache timeout in milliseconds (default: 5 minutes)"
+        },
+        "advanced-folder-structure-navigator.performanceLogging": {
           "type": "boolean",
           "default": false,
-          "description": "Include hidden files (starting with .) in structure"
+          "description": "Enable performance logging and metrics collection"
         },
-        "advanced-folder-structure-navigator.maxDepth": {
+        "advanced-folder-structure-navigator.iconStyle": {
+          "type": "string",
+          "enum": [
+            "emoji",
+            "unicode",
+            "ascii",
+            "none"
+          ],
+          "default": "emoji",
+          "description": "Icon style for file and folder representation"
+        },
+        "advanced-folder-structure-navigator.customIcons": {
+          "type": "object",
+          "default": {},
+          "description": "Custom icon mappings for file extensions (e.g., {\".vue\": \"🎨\", \".go\": \"🐹\"})"
+        },
+        "advanced-folder-structure-navigator.includeLineNumbers": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include line numbers in tree output"
+        },
+        "advanced-folder-structure-navigator.colorOutput": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use colored output (when supported)"
+        },
+        "advanced-folder-structure-navigator.compressLargeDirs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Compress directories with many files for better readability"
+        },
+        "advanced-folder-structure-navigator.compressionThreshold": {
           "type": "number",
-          "default": 10,
-          "description": "Maximum depth for directory traversal"
+          "default": 50,
+          "minimum": 10,
+          "maximum": 1000,
+          "description": "Number of items in a directory before compression is applied"
         },
-        "advanced-folder-structure-navigator.defaultExcludeFolders": {
-          "type": "array",
-          "default": ["node_modules", ".git", "dist", "build"],
-          "description": "Default folders to exclude from structure"
+        "advanced-folder-structure-navigator.showStatistics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include statistics summary in the output"
+        },
+        "advanced-folder-structure-navigator.enablePresets": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable quick configuration presets"
+        },
+        "advanced-folder-structure-navigator.presets": {
+          "type": "object",
+          "default": {
+            "minimal": {
+              "includeHidden": false,
+              "includeSize": false,
+              "maxDepth": 5,
+              "excludeFolders": ["node_modules", ".git"]
+            },
+            "detailed": {
+              "includeHidden": true,
+              "includeSize": true,
+              "includePermissions": true,
+              "maxDepth": 10,
+              "outputFormat": "markdown"
+            },
+            "documentation": {
+              "includeSize": false,
+              "maxDepth": 3,
+              "outputFormat": "markdown",
+              "excludeFolders": ["node_modules", ".git", "dist", "build"]
+            },
+            "development": {
+              "includeHidden": false,
+              "extensionFilter": ["js", "ts", "jsx", "tsx", "vue", "py", "java", "cpp", "c", "h"],
+              "respectGitignore": true,
+              "maxDepth": 8
+            }
+          },
+          "description": "Predefined configuration presets"
+        },
+        "advanced-folder-structure-navigator.autoSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically save generated structures to file"
+        },
+        "advanced-folder-structure-navigator.autoOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically open generated structure files"
         }
       }
-    }
+    },
+    "keybindings": [
+      {
+        "command": "advanced-folder-structure-navigator.generateStructure",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s",
+        "when": "explorerViewletFocus"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.generateInteractiveStructure",
+        "key": "ctrl+alt+shift+s",
+        "mac": "cmd+alt+shift+s",
+        "when": "explorerViewletFocus"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -99,5 +363,9 @@
     "typescript": "^5.8.3",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "glob": "^8.1.0",
+    "minimatch": "^6.2.0"
   }
 }
