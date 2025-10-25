@@ -62,6 +62,32 @@
         "command": "advanced-folder-structure-navigator.manageTemplates",
         "title": "Manage Structure Templates",
         "icon": "$(template)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.batchProcess",
+        "title": "Batch Process Directories",
+        "icon": "$(files)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.generateWithAnalysis",
+        "title": "Generate with Analysis",
+        "icon": "$(symbol-misc)"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.applyMinimalPreset",
+        "title": "Apply Minimal Preset"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.applyDetailedPreset",
+        "title": "Apply Detailed Preset"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.applyDocumentationPreset",
+        "title": "Apply Documentation Preset"
+      },
+      {
+        "command": "advanced-folder-structure-navigator.applyDevelopmentPreset",
+        "title": "Apply Development Preset"
       }
     ],
     "menus": {
@@ -103,6 +129,25 @@
         },
         {
           "command": "advanced-folder-structure-navigator.manageTemplates"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.batchProcess"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.generateWithAnalysis",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.applyMinimalPreset"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.applyDetailedPreset"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.applyDocumentationPreset"
+        },
+        {
+          "command": "advanced-folder-structure-navigator.applyDevelopmentPreset"
         }
       ]
     },

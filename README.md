@@ -1,4 +1,4 @@
-# 📂 Folder Structure Navigator v1.0.0
+# 📂 Folder Structure Navigator v2.0.0
 
 A **VS Code extension** to generate, explore, and export customizable folder structures — with advanced filtering, multiple formats, AI-powered insights, and performance optimization.
 
