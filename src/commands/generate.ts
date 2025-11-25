@@ -134,8 +134,8 @@ function generateInWorker(
     token: vscode.CancellationToken
 ): Promise<string> {
     return new Promise((resolve, reject) => {
-        // Use the compiled worker file path
-        const workerPath = path.join(__dirname, '../core/worker.js');
+        // Use the compiled worker file path (after bundling, __dirname = dist/)
+        const workerPath = path.join(__dirname, 'core/worker.js');
 
         const worker = new Worker(workerPath);
 
