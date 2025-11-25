@@ -383,6 +383,11 @@
           "type": "boolean",
           "default": true,
           "description": "Automatically open generated structure files"
+        },
+        "advanced-folder-structure-navigator.useStreaming": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use streaming mode for memory-efficient generation (recommended for large repositories with 10,000+ files)"
         }
       }
     },

@@ -1,168 +1,129 @@
-# 📂 Folder Structure Navigator v2.0.0
+# Folder Structure Navigator
 
-A **VS Code extension** to generate, explore, and export customizable folder structures — with advanced filtering, multiple formats, AI-powered insights, and performance optimization.
+Generate beautiful, customizable folder structure diagrams for your projects with advanced filtering, multiple export formats, and AI-powered insights.
 
----
+## ✨ Features
 
-## 🚀 Key Features
+- **Multiple Formats**: Export as Tree, JSON, Markdown, XML, or CSV
+- **Smart Filtering**: Respect .gitignore, filter by extension, exclude folders
+- **AI Analysis**: Detect project type, find issues, get recommendations
+- **Memory Efficient**: Streaming mode for large repositories (10,000+ files)
+- **Interactive Wizard**: Step-by-step configuration without editing settings
+- **Directory Comparison**: Compare two folders side-by-side
+- **Batch Processing**: Generate reports for multiple directories
+- **Rich Metadata**: Include file sizes, permissions, and modified dates
 
-| Feature                     | Description                                                                            |
-| :-------------------------- | :------------------------------------------------------------------------------------- |
-| **Multiple Output Formats** | Export structures as Tree View, JSON, Markdown, or XML.                                |
-| **Advanced Filtering**      | Exclude folders, filter by extensions, ignore glob patterns, and respect `.gitignore`. |
-| **AI-Powered Analysis**     | Detects project type, finds structural issues, and provides recommendations.           |
-| **Directory Comparison**    | Side-by-side comparison of two different directories.                                  |
-| **Batch Processing**        | Generate reports for multiple directories at once.                                     |
-| **Template System**         | Save/load configuration presets for reuse.                                             |
-| **Performance Optimized**   | Uses caching for faster repeated operations.                                           |
-| **Detailed Metadata**       | Optionally include size, permissions, and modified dates.                              |
-| **Interactive Wizard**      | Step-by-step guide to configure generation without editing settings.                   |
+## 🚀 Quick Start
 
----
+1. Right-click any folder in VS Code Explorer
+2. Select **Generate Folder Structure**
+3. View the generated structure (auto-saved)
 
-## 📦 Installation
+**Keyboard Shortcuts:**
+- `Ctrl+Alt+S` (Mac: `Cmd+Alt+S`) - Quick generate
+- `Ctrl+Alt+Shift+S` - Interactive mode with wizard
 
-1. Open **Visual Studio Code**.
-2. Go to **Extensions** (`Ctrl+Shift+X`).
-3. Search for **"Folder Structure Navigator v2.0"**.
-4. Click **Install**.
+## 📋 Commands
 
-Or via CLI:
+Open Command Palette (`Ctrl+Shift+P`) and search for:
 
-```bash
-code --install-extension samarthasmg14.folder-structure-navigator
-```
-
----
-
-## 🎯 Quick Start
-
-1. **Right-click** on any folder in the VS Code Explorer.
-2. Select **Generate Folder Structure**.
-3. View the structure in a new file (auto-saved).
-
-👉 For more control, choose **Generate Interactive Structure** and follow the prompts.
-
----
-
-## 🛠️ Commands
-
-| Command                            | ID                             | Shortcut           |
-| :--------------------------------- | :----------------------------- | :----------------- |
-| **Generate Folder Structure**      | `generateStructure`            | `Ctrl+Alt+S`       |
-| **Generate Interactive Structure** | `generateInteractiveStructure` | `Ctrl+Alt+Shift+S` |
-| **Compare Directories**            | `compareDirectories`           | –                  |
-| **Export Structure**               | `exportStructure`              | –                  |
-| **Manage Templates**               | `manageTemplates`              | –                  |
-| **Show Performance Report**        | `showPerformanceReport`        | –                  |
-| **Generate with Analysis**         | `generateWithAnalysis`         | –                  |
-| **Batch Process Directories**      | `batchProcess`                 | –                  |
-
----
+- `Generate Folder Structure` - Quick generation with default settings
+- `Generate Interactive Structure` - Step-by-step wizard
+- `Compare Directory Structures` - Compare two folders
+- `Export Structure` - Choose format after selecting folder
+- `Generate with Analysis` - Include AI-powered insights
+- `Batch Process Directories` - Process multiple folders
+- `Manage Templates` - Save/load configuration presets
 
 ## ⚙️ Configuration
 
-Add custom settings in `settings.json`:
+Access settings via `File > Preferences > Settings` and search for "Folder Structure Navigator":
 
-| Setting                | Description                                         | Default                   |
-| :--------------------- | :-------------------------------------------------- | :------------------------ |
-| `includeHiddenFiles`   | Include hidden files (`.` prefix).                  | `false`                   |
-| `extensionFilter`      | Limit by extensions (`["js","ts"]`).                | `null`                    |
-| `excludeFolders`       | Folders to skip.                                    | `["node_modules",".git"]` |
-| `excludePatterns`      | Glob patterns to skip (e.g., `*.log`).              | `["*.log","*.tmp"]`       |
-| `maxDepth`             | Max folder depth (0 = unlimited).                   | `10`                      |
-| `respectGitignore`     | Respect `.gitignore` rules.                         | `true`                    |
-| `includeSize`          | Show file/folder sizes.                             | `false`                   |
-| `includePermissions`   | Show file permissions.                              | `false`                   |
-| `includeModifiedDate`  | Show last modified date.                            | `false`                   |
-| `sortBy`               | Sort by `name`, `size`, `modified`, or `type`.      | `"name"`                  |
-| `outputFormat`         | Default format (`tree`, `json`, `markdown`, `xml`). | `"tree"`                  |
-| `useProgressIndicator` | Show progress during generation.                    | `true`                    |
-| `enableCaching`        | Enable caching for speed.                           | `true`                    |
-| `iconStyle`            | Icon style: `emoji`, `unicode`, `ascii`, `none`.    | `"emoji"`                 |
-| `customIcons`          | Map extensions to icons.                            | `{}`                      |
-| `compressLargeDirs`    | Collapse large directories.                         | `true`                    |
-| `compressionThreshold` | Collapse if > N items.                              | `50`                      |
-| `autoSave`             | Auto-save generated structures.                     | `true`                    |
-| `autoOpen`             | Auto-open after creation.                           | `true`                    |
+**Essential Settings:**
+- `includeHiddenFiles` - Show hidden files/folders
+- `maxDepth` - Maximum directory depth (0 = unlimited)
+- `outputFormat` - Default format: tree, json, markdown, xml, csv
+- `excludeFolders` - Folders to skip (default: node_modules, .git, dist)
+- `respectGitignore` - Honor .gitignore rules
+- `useStreaming` - Enable for large repos (10,000+ files)
 
----
+**Presets:** Apply quick configurations:
+- `Minimal` - Basic structure, limited depth
+- `Detailed` - Include all metadata
+- `Documentation` - Markdown format, shallow depth
+- `Development` - Source code files only
 
-## 📋 Output Formats
+## 💡 Examples
 
-**Tree View (default)**
-
+**Basic tree structure:**
 ```
 📁 my-project
-├── 📄 README.md (2.1 KB)
+──────────────────────────────────────────────────
 ├── 📁 src
-│   ├── 📄 index.js (3.2 KB)
-│   └── 📁 components
-│       └── 📄 Header.jsx (1.8 KB)
+│   ├── 📄 index.ts
+│   └── 📄 utils.ts
+├── 📄 package.json
+└── 📄 README.md
 ```
 
-**JSON**
+**With metadata:**
+```
+├── 📄 app.ts (2.5 KB) [rw-r--r--] ⏰ 2025-01-15
+```
 
+**AI Analysis:**
+```markdown
+## 📊 Project analysis
+- **Detected type:** React/Next.js
+- **Issues:** Missing common files: LICENSE, .gitignore
+- **Recommendations:** Add ESLint configuration
+- **Technologies:** JavaScript/TypeScript, NodeJS, Webpack
+```
+
+## 🎯 Use Cases
+
+- **Documentation** - Include folder structures in README files
+- **Onboarding** - Help new team members understand project layout
+- **Code Reviews** - Visualize project organization
+- **Architecture** - Document and share project structure
+- **Backup** - Keep snapshots of directory organization
+
+## 🔧 Advanced Features
+
+**Worker Threads:** Enable `useWorker` for CPU-intensive operations (experimental)
+
+**Streaming Mode:** Enable `useStreaming` for memory-efficient processing of massive repositories
+
+**Custom Icons:** Define custom file type icons in settings:
 ```json
 {
-  "metadata": {
-    "generatedAt": "2025-08-16T15:37:12.000Z",
-    "generationTime": "150ms",
-    "itemsProcessed": 25
-  },
-  "structure": {
-    "name": "my-project",
-    "type": "directory",
-    "children": [...]
+  "advanced-folder-structure-navigator.customIcons": {
+    ".vue": "🎨",
+    ".go": "🐹"
   }
 }
 ```
 
-**Markdown**
+**Compression:** Large directories (50+ items) are automatically collapsed - adjust threshold in settings
 
-```markdown
-# 📁 my-project
-**Generated:** 2025-08-16T15:37:12.000Z  
-**Generation Time:** 150ms  
+## 📝 Tips
 
-## Directory Structure
-...
-```
+- Use `.gitignore` to automatically exclude build artifacts
+- Save configurations as templates for reuse across projects
+- Enable metadata (size, dates) for documentation snapshots
+- Use CSV format for importing into spreadsheets
+- Compare directories before/after major refactoring
 
----
+## 🐛 Issues & Feedback
 
-## 🔧 Advanced Usage
-
-### Templates
-
-* **Save Template:** `Manage Templates` → *Save Current Config*
-* **Load Template:** `Manage Templates` → *Load Template*
-* Stored in `.vscode/folder-navigator-templates.json`.
-
-### AI-Powered Analysis
-
-Run **Generate with Analysis** → produces a report with:
-
-* Detected project type (e.g., React, Node.js, Python).
-* Health checks (deep nesting, missing LICENSE, etc).
-* Best practice recommendations.
-* Detected frameworks/tools.
-
----
-
-## 🐛 Troubleshooting
-
-* **Slow on big projects?** Exclude heavy folders (`node_modules`) and lower `maxDepth`.
-* Report bugs/requests → [GitHub Issues](https://github.com/DEADSERPENT/folder-structure-navigator/issues).
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Fork → improve → PR.
-
----
+Report issues or request features on [GitHub](https://github.com/DEADSERPENT/folder-structure-navigator/issues)
 
 ## 📄 License
 
-MIT License — see [LICENSE](https://github.com/DEADSERPENT/folder-structure-navigator/blob/main/LICENSE).
+MIT License - see LICENSE file for details
+
+---
+
+**Version:** 2.0.0
+**Publisher:** samarthasmg14
+**Last Updated:** November 2025

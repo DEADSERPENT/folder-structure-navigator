@@ -24,6 +24,7 @@ const esbuildProblemMatcherPlugin = {
 };
 
 async function main() {
+	// Build the main extension
 	const ctx = await esbuild.context({
 		entryPoints: [
 			'src/extension.ts'
@@ -42,11 +43,33 @@ async function main() {
 			esbuildProblemMatcherPlugin,
 		],
 	});
+
+	// Build the worker separately (NO vscode external)
+	const workerCtx = await esbuild.context({
+		entryPoints: [
+			'src/core/worker.ts'
+		],
+		bundle: true,
+		format: 'cjs',
+		minify: production,
+		sourcemap: !production,
+		sourcesContent: false,
+		platform: 'node',
+		outfile: 'dist/core/worker.js',
+		logLevel: 'silent',
+		plugins: [
+			esbuildProblemMatcherPlugin,
+		],
+	});
+
 	if (watch) {
 		await ctx.watch();
+		await workerCtx.watch();
 	} else {
 		await ctx.rebuild();
+		await workerCtx.rebuild();
 		await ctx.dispose();
+		await workerCtx.dispose();
 	}
 }
 
