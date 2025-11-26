@@ -124,6 +124,6 @@ MIT License - see LICENSE file for details
 
 ---
 
-**Version:** 3.0.0
+**Version:** 3.0.1
 **Publisher:** samarthasmg14
 **Last Updated:** November 2025

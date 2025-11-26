@@ -2,8 +2,9 @@
   "name": "folder-structure-navigator",
   "publisher": "samarthasmg14",
   "displayName": "Folder Structure Navigator v2.0",
+  "icon": "icon.png",
   "description": "Generate comprehensive, customizable folder structure representations with advanced filtering, multiple output formats, and performance optimization.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/DEADSERPENT/folder-structure-navigator.git"
